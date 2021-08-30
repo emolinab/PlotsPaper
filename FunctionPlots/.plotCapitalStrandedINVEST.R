@@ -6,7 +6,7 @@ library(luscale)
 library(tidyr)
 library(mrcommons)
 
-.plotCapitalStranded<-function(gdx_c,scenario,tag,folder,mobility=FALSE){
+.plotCapitalStrandedINVEST<-function(gdx_c,scenario,tag,folder,mobility=FALSE){
   aux<-1
   global<-list()
   for(gd in gdx_c){
@@ -25,10 +25,29 @@ library(mrcommons)
     ImmobileStocks <- readGDX(gdx,"p38_capital_immobile")
     MobileStocks <- readGDX(gdx,"p38_capital_mobile")
     
-    check<-invest_im+ImmobileStocks-RequImmobile
-    if(any(check)<0) stop ("ERROR, requirements larger than available stocks + investment")
+    StrandedImmobile<-invest_im+ImmobileStocks-RequImmobile
+    if(any((StrandedImmobile)<(-1e-4))) stop ("ERROR, requirements larger than available stocks + investment")
+    StrandedImmobile<-dimSums(StrandedImmobile,dim=3)
     
-    }
+    StrandedMobile<-invest_m+MobileStocks-RequMobile
+    if(any((StrandedMobile)<(-1e-4))) stop ("ERROR, requirements larger than available stocks + investment")
+    
+    StrandedStocks<-StrandedImmobile+StrandedMobile
+    global[[scenario[aux]]]<-superAggregate(StrandedStocks,aggr_type = "sum",level="regglo")
+    
+    Area_grid<-croparea(gdx,product_aggr = TRUE,level="grid",dir=gd)
+    
+    
+    Stranded_Stocks_grid<-gdxAggregate(gdx,StrandedStocks,weight = Area_grid, from= "cell",to="grid", absolute = TRUE, dir = gd)
+    getNames(Stranded_Stocks_grid)<-scenario[aux]
+    
+    map<-plotmap2(Stranded_Stocks_grid[,2090,]*1000,file=paste0(folder,"/",tag,"_",scenario[aux],".pdf"),title="Stranded Capital stocks",
+                  legendname = "(1000 USD05$)",lowcol="white",midcol = "chocolate",
+                  highcol="brown",facet_style="paper",text_size=25,legend_range = c(0,700),midpoint = 700/2)
+    
+    aux<-aux+1
+  }
+  
   return(list(global,map))
 }
 
@@ -36,7 +55,7 @@ gdx_c<-c("C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON
          "C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-27_10.39.53/")
 
 scenario<-c("GFDL-cc","GFDL-nocc")
-tag<-"Paper_plots_fix"
+tag<-"Paper_plots_InvStrand"
 folder<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Images/LDON_paper/"
 
-a<-.plotCapitalStranded(gdx_c,scenario,tag,folder)
+a<-.plotCapitalStrandedINVEST(gdx_c,scenario,tag,folder)
