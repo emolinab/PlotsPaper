@@ -6,7 +6,7 @@ library(luscale)
 library(tidyr)
 library(mrcommons)
 
-.plotCapitalStranded<-function(gdx_c,scenario,tag,folder,mobility=FALSE){
+.plotCapitalStranded<-function(gdx_c,scenario,tag,folder){
   aux<-1
   global<-list()
   for(gd in gdx_c){
@@ -43,9 +43,11 @@ library(mrcommons)
     StrandedImmobile<-setYears(ImmobileStocks2,t)-setYears(RequImmobile[,t,],t)
     StrandedMobile<-setYears(MobileStocks[,t_1,],t)-setYears(RequMobile[,t,],t)
     
-    StrandedImmobile[StrandedImmobile<=0]<-0 #as a check
+    if(any((StrandedImmobile)<(-1e-4))) stop("Error . Requirements larger than investments plus stocks") 
+    StrandedImmobile[StrandedImmobile<0]<-0
     StrandedImmobile<-dimSums(StrandedImmobile,dim=3)
-    StrandedMobile[StrandedMobile<=0]<-0
+    if(any((StrandedMobile)<(-1e-4))) stop("Error . Requirements larger than investments plus stocks")
+    StrandedMobile[StrandedMobile<0]<-0
     
     StrandedStocks<-StrandedImmobile+StrandedMobile
     global[[scenario[aux]]]<-superAggregate(StrandedStocks,aggr_type = "sum",level="regglo")
@@ -58,18 +60,20 @@ library(mrcommons)
     
     map<-plotmap2(Stranded_Stocks_grid[,2090,]*1000,file=paste0(folder,"/",tag,"_",scenario[aux],".pdf"),title="Stranded Capital stocks",
              legendname = "(1000 USD05$)",lowcol="white",midcol = "chocolate",
-             highcol="brown",facet_style="paper",text_size=25)
+             highcol="brown",facet_style="paper",text_size=25,legend_range = c(0,700),midpoint = 700/2)
 
     aux<-aux+1
   }
   return(list(global,map))
 }
 
-gdx_c<-c("C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_cc__2021-08-15_11.57.48",
-         "C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.48.02")
+gdx_c<-c("C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-27_10.49.47/",
+         "C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-27_10.39.53/")
 
-scenario<-c("UKESM-cc","UKESM-nocc")
-tag<-"Paper_plots_fix"
+scenario<-c("GFDL-cc","GFDL-nocc")
+tag<-"Paper_plots_bugfix"
 folder<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Images/LDON_paper/"
 
 a<-.plotCapitalStranded(gdx_c,scenario,tag,folder)
+
+a[[1]]

@@ -25,16 +25,17 @@ library(mrcommons)
     ImmobileStocks <- readGDX(gdx,"p38_capital_immobile")
     MobileStocks <- readGDX(gdx,"p38_capital_mobile")
     
-    stranded<-invest_im-(ImmobileStocks+RequImmobile)
+    check<-invest_im+ImmobileStocks-RequImmobile
+    if(any(check)<0) stop ("ERROR, requirements larger than available stocks + investment")
     
     }
   return(list(global,map))
 }
 
-gdx_c<-c("C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_cc__2021-08-15_11.57.48",
-         "C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.48.02")
+gdx_c<-c("C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-27_10.49.47/",
+         "C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-27_10.39.53/")
 
-scenario<-c("UKESM-cc","UKESM-nocc")
+scenario<-c("GFDL-cc","GFDL-nocc")
 tag<-"Paper_plots_fix"
 folder<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Images/LDON_paper/"
 
