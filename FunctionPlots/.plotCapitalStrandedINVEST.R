@@ -25,7 +25,7 @@ library(mrcommons)
     ImmobileStocks <- readGDX(gdx,"p38_capital_immobile")
     MobileStocks <- readGDX(gdx,"p38_capital_mobile")
     
-    stranded<-invest_im+ImmobileStocks-RequImmobile
+    stranded<-invest_im-(ImmobileStocks+RequImmobile)
     
     }
   return(list(global,map))
