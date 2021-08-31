@@ -64,7 +64,7 @@ library(wesanderson)
   
   average<-ggplot(data_frame,aes(x=Year,y=percent,color=as.factor(gcm)))+geom_line(size=1.5)+geom_point(size=1.5,color="black")+ theme_light()+
     theme(title=element_text(size=18,face="bold"),axis.title= element_text(size=16),axis.text.x = element_text(size=16),axis.text.y = element_text(size=16),legend.title = element_text(size=14,face="bold"),legend.text = element_text(size=12))+#,legend.position = "bottom"
-    ylab("% difference potential yields")+labs(color = "gcm")+
+    ylab("% Average relative difference")+labs(color = "gcm")+
     scale_color_manual(values=wes_palette(n=length(unique(data_frame$gcm)), name="Darjeeling1",type="continuous"))+
     ggtitle("(base year = 1995, RCP=8p5)")
   
