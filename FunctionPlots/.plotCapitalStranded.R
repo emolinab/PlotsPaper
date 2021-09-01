@@ -67,12 +67,12 @@ library(mrcommons)
   return(list(global,map))
 }
 
-gdx_c<-c("C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-27_10.49.47/",
-         "C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDOn_15/PaRun_LDON15_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-27_10.39.53/")
+gdx_c<-c("C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDON_rev463/PaIn_rev463_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-31_19.50.08/",
+         "C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDON_rev463/PaIn_rev463_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.35.59/")
 
 scenario<-c("GFDL-cc","GFDL-nocc")
-tag<-"Paper_plots_bugfix"
-folder<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Images/LDON_paper/"
+tag<-"Paper_stranded"
+folder<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Images/LDON_paper/ThursdaySept02/"
 
 a<-.plotCapitalStranded(gdx_c,scenario,tag,folder)
 

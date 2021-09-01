@@ -2,42 +2,43 @@
 
 #dynamic
 
-folder_runs<-"C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/"
+folder_runs<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDON_rev463/"
 
-runs_cc<-c("Paper_LDON_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-15_11.53.55",
-           "Paper_LDON_IPSL-CM6A-LR_sticky_feb18_dynamic_cc__2021-08-15_12.01.36",
-           "Paper_LDON_MPI-ESM1-2-HR_sticky_feb18_dynamic_cc__2021-08-15_11.59.40",
-           "Paper_LDON_MRI-ESM2-0_sticky_feb18_dynamic_cc__2021-08-15_11.55.50",
-           "Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_cc__2021-08-15_11.57.48")
+runs_cc<-c("PaIn_rev463_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-31_19.50.08",
+           "PaIn_rev463_IPSL-CM6A-LR_sticky_feb18_dynamic_cc__2021-08-31_20.00.00",
+           "PaIn_rev463_MPI-ESM1-2-HR_sticky_feb18_dynamic_cc__2021-08-31_19.57.43",
+           "PaIn_rev463_MRI-ESM2-0_sticky_feb18_dynamic_cc__2021-08-31_19.52.46",
+           "PaIn_rev463_UKESM1-0-LL_sticky_feb18_dynamic_cc__2021-08-31_19.55.23")
 
-runs_nocc<-c("Paper_LDON_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.44.07",
-             "Paper_LDON_IPSL-CM6A-LR_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.51.59",
-             "Paper_LDON_MPI-ESM1-2-HR_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.50.03",
-             "Paper_LDON_MRI-ESM2-0_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.46.05",
-             "Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_nocc_hist__2021-08-15_11.48.02")
+runs_nocc<-c("PaIn_rev463_GFDL-ESM4_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.35.59",
+             "PaIn_rev463_IPSL-CM6A-LR_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.47.24",
+             "PaIn_rev463_MPI-ESM1-2-HR_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.44.26",
+             "PaIn_rev463_MRI-ESM2-0_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.39.00",
+             "PaIn_rev463_UKESM1-0-LL_sticky_feb18_dynamic_nocc_hist__2021-08-31_19.41.49")
+
 gcms<-c("GFDL-ESM4",
         "IPSL-CM6A-LR",
         "MPI-ESM1-2-HR",
         "MRI-ESM2-0",
-        "UKESM1-0-LL") 
+        "UKESM1-0-LL")
+
 Inpt_Agg=TRUE
-scenario<-"Dynamic"
+scenario<-"Inertia"
 
 b<-.adaptationCostsPlotsAverage(folder_runs,scenario,runs_cc,runs_nocc,gcms,Inpt_Agg)
 
 #free
+runs_cc<-c("PaIn_rev463_GFDL-ESM4_sticky_feb18_free_split_cc__2021-08-31_21.02.47",
+           "PaIn_rev463_IPSL-CM6A-LR_sticky_feb18_free_split_cc__2021-08-31_21.11.54",
+           "PaIn_rev463_MPI-ESM1-2-HR_sticky_feb18_free_split_cc__2021-08-31_21.09.41",
+           "PaIn_rev463_MRI-ESM2-0_sticky_feb18_free_split_cc__2021-08-31_21.05.08",
+           "PaIn_rev463_UKESM1-0-LL_sticky_feb18_free_split_cc__2021-08-31_21.07.28")
 
-runs_cc<-c("Paper_LDON_GFDL-ESM4_sticky_feb18_free_split_cc__2021-08-15_12.51.57",
-           "Paper_LDON_IPSL-CM6A-LR_sticky_feb18_free_split_cc__2021-08-15_12.59.45",
-           "Paper_LDON_MPI-ESM1-2-HR_sticky_feb18_free_split_cc__2021-08-15_12.57.50",
-           "Paper_LDON_MRI-ESM2-0_sticky_feb18_free_split_cc__2021-08-15_12.53.57",
-           "Paper_LDON_UKESM1-0-LL_sticky_feb18_free_split_cc__2021-08-15_12.55.53")
-
-runs_nocc<-c("Paper_LDON_GFDL-ESM4_sticky_feb18_free_split_nocc_hist__2021-08-15_12.42.13",
-               "Paper_LDON_IPSL-CM6A-LR_sticky_feb18_free_split_nocc_hist__2021-08-15_12.49.56",
-               "Paper_LDON_MPI-ESM1-2-HR_sticky_feb18_free_split_nocc_hist__2021-08-15_12.48.01",
-               "Paper_LDON_MRI-ESM2-0_sticky_feb18_free_split_nocc_hist__2021-08-15_12.44.07",
-               "Paper_LDON_UKESM1-0-LL_sticky_feb18_free_split_nocc_hist__2021-08-15_12.46.06")
+runs_nocc<-c("PaIn_rev463_GFDL-ESM4_sticky_feb18_free_split_nocc_hist__2021-08-31_20.50.56",
+             "PaIn_rev463_IPSL-CM6A-LR_sticky_feb18_free_split_nocc_hist__2021-08-31_21.00.33",
+             "PaIn_rev463_MPI-ESM1-2-HR_sticky_feb18_free_split_nocc_hist__2021-08-31_20.58.24",
+             "PaIn_rev463_MRI-ESM2-0_sticky_feb18_free_split_nocc_hist__2021-08-31_20.53.35",
+             "PaIn_rev463_UKESM1-0-LL_sticky_feb18_free_split_nocc_hist__2021-08-31_20.56.09")
 
 
 Inpt_Agg=TRUE

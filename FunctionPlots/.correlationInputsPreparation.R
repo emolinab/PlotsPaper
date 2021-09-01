@@ -23,7 +23,7 @@ library(grDevices)
     #initialization<-SPAM
    
     years<- if(type=="SPAM") c(2000,2005,2010) else 
-      intersect(getYears(initialization),getYears(cropland))
+      intersect(getYears(initialization,as.integer = TRUE),getYears(cropland,as.integer = TRUE))
     
       for (ye in years){
         if (type=="SPAM"){
@@ -65,14 +65,14 @@ library(grDevices)
 }
 
 #### Example
-folder_runs<-"C:/Users/mbacca/Documents/PIK/GitHub_downloads/MAGPIE_Versions/split2020UpToDate/magpie/output/"
+folder_runs<-"C:/Users/mbacca/Documents/PIK/Papers/Paper one/Runs_LDON_rev463/"
 
-run_names<-c("Paper_LDON_UKESM1-0-LL_sticky_feb18_dynamic_cc__2021-08-15_11.57.48/",
-             "Paper_LDON_UKESM1-0-LL_sticky_feb18_free_cc__2021-08-15_12.26.38/")
+run_names<-c("PaIn_rev463_GFDL-ESM4_sticky_feb18_dynamic_cc__2021-08-31_19.50.08/",
+             "PaIn_rev463_GFDL-ESM4_sticky_feb18_free_cc__2021-08-31_20.26.39/")
 
 run_nicknames<-c("Inertia",
                  "Free")
-gcm<-"UKESM1-0-LL"
+gcm<-"GFDL-ESM4"
 path_in<-getwd()
-type<-"SPAM"
+type<-"initialization"
 a<-.correlationInputsPreparation(folder_runs,run_names,run_nicknames,gcm,path_in,type)
